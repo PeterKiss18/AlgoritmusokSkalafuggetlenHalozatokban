@@ -54,10 +54,10 @@ def average_time_test(n, m, rounds = 10):
     dinic_opt_time = round(dinic_opt_time/rounds, 5)
     return dinic_time, boykov_kolmogorov_time, preflow_push_time, dinic_opt_time
 
-df = pd.DataFrame(columns = ["csucsszam", "dinic", "dinic_bi", "dinic_level_mem", "dinic_opt"])
+df = pd.DataFrame(columns = ["csucsszam", "dinic", "bk", "preflow", "dinic_opt"])
 for n in np.logspace(2, 4, num=10, base=10, dtype='int'):
     dinic_time, boykov_kolmogorov_time, preflow_push_time, dinic_opt_time = average_time_test(n, 5)
-    new_row = {"csucsszam": n, "dinic": dinic_time, "dinic_bi": boykov_kolmogorov_time, "dinic_level_mem": preflow_push_time, "dinic_opt": dinic_opt_time}
+    new_row = {"csucsszam": n, "dinic": dinic_time, "bk": boykov_kolmogorov_time, "preflow": preflow_push_time, "dinic_opt": dinic_opt_time}
     df = df.append(new_row, ignore_index=True)
 
 df.to_csv("tablazatok/barabasi_flow_scaling.csv")
